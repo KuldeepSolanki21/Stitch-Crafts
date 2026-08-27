@@ -10,3 +10,4 @@ export * from './coupon.schema';
 export * from './banner.schema';
 export * from './review.schema';
 export * from './newsletter.schema';
+export * from './auth.schema.js';
