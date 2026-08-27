@@ -54,21 +54,21 @@ export const CouponsManagementPage: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Promotions & Coupons</h2>
-          <p className="text-sm text-gray-500">Configure bespoke percentage and fixed price promotional vouchers</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Promotions & Coupons</h2>
+          <p className="text-xs sm:text-sm text-gray-500">Configure bespoke percentage and fixed price promotional vouchers</p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-admin-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-leather-dark transition"
+          className="w-full sm:w-auto text-center bg-admin-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-leather-dark transition shadow-sm"
         >
           + Create Coupon Rule
         </button>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+        <table className="w-full text-left text-sm min-w-[650px]">
           <thead className="bg-gray-50 text-gray-600 font-semibold border-b">
             <tr>
               <th className="p-4">Code</th>
@@ -89,7 +89,7 @@ export const CouponsManagementPage: React.FC = () => {
               coupons.map((c) => (
                 <tr key={c.id} className="hover:bg-gray-50/50">
                   <td className="p-4 font-mono font-bold text-gray-900 tracking-wider">{c.code}</td>
-                  <td className="p-4 font-semibold text-leather">
+                  <td className="p-4 font-semibold text-admin-primary">
                     {c.discountType === 'PERCENTAGE' ? `${c.discount}%` : `₹${c.discount}`}
                   </td>
                   <td className="p-4 text-gray-600">{c.minOrderValue ? `₹${c.minOrderValue}` : 'None'}</td>
@@ -103,7 +103,7 @@ export const CouponsManagementPage: React.FC = () => {
                     </span>
                   </td>
                   <td className="p-4 text-right">
-                    <button onClick={() => handleDelete(c.id)} className="text-red-600 hover:underline">
+                    <button onClick={() => handleDelete(c.id)} className="text-red-600 hover:underline text-xs font-semibold">
                       Delete
                     </button>
                   </td>
@@ -116,7 +116,7 @@ export const CouponsManagementPage: React.FC = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl">
+          <div className="bg-white rounded-xl max-w-md w-full p-5 sm:p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold mb-4">Create Promotion Voucher</h3>
             <form onSubmit={handleCreate} className="space-y-3">
               <div>
@@ -130,7 +130,7 @@ export const CouponsManagementPage: React.FC = () => {
                   className="w-full px-3 py-2 border rounded-lg font-mono uppercase"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold uppercase text-gray-600 mb-1">Type</label>
                   <select
@@ -153,7 +153,7 @@ export const CouponsManagementPage: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold uppercase text-gray-600 mb-1">Min Order (₹)</label>
                   <input
@@ -183,7 +183,7 @@ export const CouponsManagementPage: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 text-sm bg-admin-primary text-white rounded-lg font-medium"
+                  className="px-5 py-2 text-sm bg-admin-primary text-white rounded-lg font-medium hover:bg-leather-dark transition"
                 >
                   Save Coupon
                 </button>

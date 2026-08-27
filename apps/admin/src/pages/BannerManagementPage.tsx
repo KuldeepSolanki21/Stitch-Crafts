@@ -59,38 +59,38 @@ export const BannerManagementPage: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Hero Carousel Banners</h2>
-          <p className="text-sm text-gray-500">Configure visual hero banners and brand storytelling campaigns</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Hero Carousel Banners</h2>
+          <p className="text-xs sm:text-sm text-gray-500">Configure visual hero banners and brand storytelling campaigns</p>
         </div>
         <button
           onClick={() => {
             setErrorMessage('');
             setIsModalOpen(true);
           }}
-          className="bg-admin-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-leather-dark transition"
+          className="w-full sm:w-auto text-center bg-admin-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-leather-dark transition shadow-sm"
         >
           + Add Hero Banner
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {banners.map((b) => (
           <div key={b.id} className="bg-white border rounded-xl overflow-hidden shadow-sm">
-            <div className="h-48 relative">
+            <div className="h-44 sm:h-48 relative">
               <img src={b.imageUrl} alt={b.title} className="w-full h-full object-cover" />
               <span className="absolute top-3 left-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded font-bold">
                 Order: #{b.displayOrder}
               </span>
             </div>
-            <div className="p-4 flex justify-between items-center">
-              <div>
-                <h4 className="font-bold text-base text-gray-900">{b.title}</h4>
-                <p className="text-xs text-gray-500">{b.subtitle || 'No subtitle'}</p>
-                <p className="text-xs text-leather font-mono mt-1">{b.targetUrl}</p>
+            <div className="p-4 flex justify-between items-center gap-2">
+              <div className="min-w-0">
+                <h4 className="font-bold text-sm sm:text-base text-gray-900 truncate">{b.title}</h4>
+                <p className="text-xs text-gray-500 truncate">{b.subtitle || 'No subtitle'}</p>
+                <p className="text-xs text-admin-primary font-mono mt-1 truncate">{b.targetUrl}</p>
               </div>
-              <button onClick={() => handleDelete(b.id)} className="text-red-500 text-xs font-bold hover:underline">
+              <button onClick={() => handleDelete(b.id)} className="text-red-500 text-xs font-bold hover:underline shrink-0">
                 Delete
               </button>
             </div>
@@ -100,7 +100,7 @@ export const BannerManagementPage: React.FC = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl space-y-4">
+          <div className="bg-white rounded-xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold">Create Hero Banner</h3>
 
             {errorMessage && (
@@ -146,7 +146,7 @@ export const BannerManagementPage: React.FC = () => {
                   className="w-full px-3 py-2 border rounded-lg text-sm focus:border-leather focus:outline-none"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold uppercase text-gray-600 mb-1">Target Link</label>
                   <input
@@ -167,7 +167,7 @@ export const BannerManagementPage: React.FC = () => {
                 </div>
               </div>
               <div className="flex justify-end space-x-3 pt-4">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-sm text-gray-600">Cancel</button>
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">Cancel</button>
                 <button type="submit" className="px-5 py-2 text-sm bg-admin-primary text-white rounded-lg font-medium hover:bg-leather-dark transition">Save Banner</button>
               </div>
             </form>

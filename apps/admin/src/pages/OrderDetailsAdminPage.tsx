@@ -57,27 +57,27 @@ export const OrderDetailsAdminPage: React.FC = () => {
   if (!order) return <div className="p-8 text-center text-gray-500">Order not found.</div>;
 
   return (
-    <div className="max-w-5xl mx-auto pb-24">
-      <div className="flex justify-between items-center mb-6">
+    <div className="max-w-5xl mx-auto pb-16">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6">
         <div>
           <Link to="/orders" className="text-xs text-gray-500 hover:text-black">← Back to Orders</Link>
-          <h2 className="text-2xl font-bold mt-1">Order #{order.id}</h2>
+          <h2 className="text-xl sm:text-2xl font-bold mt-1">Order #{order.id}</h2>
         </div>
         <span className="text-xs font-semibold px-3 py-1 bg-gray-100 rounded">
           Placed on {new Date(order.createdAt).toLocaleDateString()}
         </span>
       </div>
 
-      <div className="grid grid-cols-3 gap-8">
-        <div className="col-span-2 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="lg:col-span-2 space-y-6">
           {/* Order Items */}
-          <div className="bg-white p-6 rounded-xl border shadow-sm">
+          <div className="bg-white p-5 sm:p-6 rounded-xl border border-gray-100 shadow-sm">
             <h3 className="font-bold text-sm uppercase text-gray-600 mb-4 border-b pb-2">Purchased Creations</h3>
-            <div className="divide-y">
+            <div className="divide-y divide-gray-100">
               {order.orderItems?.map((item: any) => (
-                <div key={item.id} className="py-4 flex justify-between items-center">
+                <div key={item.id} className="py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div className="flex items-center space-x-4">
-                    <img src={item.variant?.images[0] || item.product?.images[0] || 'https://via.placeholder.com/60'} alt="" className="w-14 h-14 object-cover rounded border" />
+                    <img src={item.variant?.images[0] || item.product?.images[0] || 'https://via.placeholder.com/60'} alt="" className="w-14 h-14 object-cover rounded border shrink-0" />
                     <div>
                       <h4 className="font-bold text-sm text-gray-900">{item.product?.title}</h4>
                       {item.variant && (
@@ -86,16 +86,16 @@ export const OrderDetailsAdminPage: React.FC = () => {
                       <p className="text-xs text-gray-400">Qty: {item.quantity} × ₹{Number(item.price).toLocaleString()}</p>
                     </div>
                   </div>
-                  <span className="font-bold text-sm">₹{Number(item.totalPrice).toLocaleString()}</span>
+                  <span className="font-bold text-sm sm:text-right">₹{Number(item.totalPrice).toLocaleString()}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Airway Bill Assignment */}
-          <div className="bg-white p-6 rounded-xl border shadow-sm space-y-4">
+          <div className="bg-white p-5 sm:p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
             <h3 className="font-bold text-sm uppercase text-gray-600 border-b pb-2">Logistics & Airway Bill</h3>
-            <form onSubmit={handleAssignTracking} className="grid grid-cols-2 gap-4">
+            <form onSubmit={handleAssignTracking} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Carrier Name</label>
                 <input
@@ -117,8 +117,8 @@ export const OrderDetailsAdminPage: React.FC = () => {
                   className="w-full p-2.5 border rounded-lg text-sm"
                 />
               </div>
-              <div className="col-span-2 flex justify-end">
-                <button type="submit" className="bg-gray-900 text-white px-5 py-2 rounded-lg text-sm font-semibold">
+              <div className="col-span-1 sm:col-span-2 flex justify-end">
+                <button type="submit" className="w-full sm:w-auto bg-gray-900 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-black transition">
                   Update Tracking & Dispatch
                 </button>
               </div>
@@ -128,7 +128,7 @@ export const OrderDetailsAdminPage: React.FC = () => {
 
         {/* Sidebar Status & Customer */}
         <div className="space-y-6">
-          <div className="bg-white p-6 rounded-xl border shadow-sm space-y-4">
+          <div className="bg-white p-5 sm:p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
             <h3 className="font-bold text-sm uppercase text-gray-600 border-b pb-2">Order State Machine</h3>
             <div>
               <label className="block text-xs font-semibold uppercase text-gray-500 mb-1">Fulfillment Status</label>
@@ -161,14 +161,14 @@ export const OrderDetailsAdminPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleUpdateStatus}
-                className="w-full bg-admin-primary text-white py-2.5 rounded-lg text-sm font-bold"
+                className="w-full bg-admin-primary text-white py-2.5 rounded-lg text-sm font-bold hover:bg-leather-dark transition"
               >
                 Save Status Changes
               </button>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl border shadow-sm space-y-2 text-xs">
+          <div className="bg-white p-5 sm:p-6 rounded-xl border border-gray-100 shadow-sm space-y-2 text-xs">
             <h3 className="font-bold text-sm uppercase text-gray-600 border-b pb-2">Destination Address</h3>
             <p className="font-semibold text-gray-900 text-sm">{order.user?.name}</p>
             <p className="text-gray-600">{order.shippingAddress?.addressLine1}</p>

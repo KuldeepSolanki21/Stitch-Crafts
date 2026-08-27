@@ -31,15 +31,15 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto px-6 py-20">
-      <div className="bg-white p-8 border border-gray-200 shadow-sm space-y-6">
+    <div className="max-w-md mx-auto px-4 sm:px-6 py-12 sm:py-20">
+      <div className="bg-white p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6 rounded-2xl">
         <div className="text-center space-y-2">
-          <h1 className="font-serif text-3xl font-bold text-charcoal">Sign In</h1>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-charcoal">Sign In</h1>
           <p className="text-xs text-gray-500">Access your saved creations, addresses and order invoices</p>
         </div>
 
         {error && (
-          <div className="p-3 bg-red-50 text-red-700 text-xs rounded border border-red-200">
+          <div className="p-3 bg-red-50 text-red-700 text-xs rounded-lg border border-red-200">
             {error}
           </div>
         )}
@@ -53,7 +53,7 @@ export const LoginPage: React.FC = () => {
               placeholder="youremail@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 border text-sm focus:border-leather focus:outline-none"
+              className="w-full px-4 py-2.5 border rounded-lg text-xs sm:text-sm focus:border-leather focus:outline-none"
             />
           </div>
 
@@ -66,7 +66,7 @@ export const LoginPage: React.FC = () => {
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2.5 border text-sm focus:border-leather focus:outline-none pr-10"
+                className="w-full px-4 py-2.5 border rounded-lg text-xs sm:text-sm focus:border-leather focus:outline-none pr-10"
               />
               <button
                 type="button"
@@ -81,7 +81,7 @@ export const LoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-charcoal text-white py-3.5 text-xs font-bold uppercase tracking-widest hover:bg-leather transition disabled:opacity-50"
+            className="w-full bg-charcoal text-white py-3.5 text-xs font-bold uppercase tracking-widest hover:bg-leather transition disabled:opacity-50 rounded-lg shadow-sm"
           >
             {loading ? 'Authenticating...' : 'Sign In'}
           </button>

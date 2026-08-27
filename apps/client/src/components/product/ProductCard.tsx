@@ -62,9 +62,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="group bg-white p-4 border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative">
+    <div className="group bg-white p-3.5 sm:p-4 border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative rounded-xl">
       <div>
-        <div className="aspect-square bg-gray-50 mb-4 overflow-hidden relative">
+        <div className="aspect-square bg-gray-50 mb-3 sm:mb-4 overflow-hidden relative rounded-lg">
           <Link to={`/product/${product.slug}`}>
             <img
               src={product.images[0] || 'https://via.placeholder.com/400'}
@@ -73,7 +73,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             />
           </Link>
           {product.discountPercentage && product.discountPercentage > 0 ? (
-            <span className="absolute top-3 left-3 bg-leather text-white text-[10px] font-bold px-2 py-0.5 tracking-wider uppercase">
+            <span className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-leather text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 tracking-wider uppercase rounded">
               {product.discountPercentage}% OFF
             </span>
           ) : null}
@@ -82,30 +82,30 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <button
             onClick={handleWishlistToggle}
             aria-label="Toggle Wishlist"
-            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-charcoal hover:text-red-500 shadow-md transition"
+            className="absolute top-2 sm:top-3 right-2 sm:right-3 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-charcoal hover:text-red-500 shadow-md transition"
           >
             {isWishlisted ? (
-              <span className="text-red-500 text-base">♥</span>
+              <span className="text-red-500 text-sm sm:text-base">♥</span>
             ) : (
-              <span className="text-gray-600 text-base hover:text-red-500">♡</span>
+              <span className="text-gray-600 text-sm sm:text-base hover:text-red-500">♡</span>
             )}
           </button>
         </div>
 
-        <p className="text-[11px] uppercase tracking-widest text-leather font-semibold mb-1">
+        <p className="text-[10px] sm:text-[11px] uppercase tracking-widest text-leather font-semibold mb-1 truncate">
           {product.category?.name || 'Leather Creation'}
         </p>
 
         <Link to={`/product/${product.slug}`}>
-          <h3 className="font-serif text-base font-bold text-charcoal group-hover:text-leather transition-colors line-clamp-1">
+          <h3 className="font-serif text-sm sm:text-base font-bold text-charcoal group-hover:text-leather transition-colors line-clamp-1">
             {product.title}
           </h3>
         </Link>
 
-        <div className="flex items-center space-x-3 mt-2 mb-4">
-          <span className="text-sm font-bold text-charcoal">₹{product.price.toLocaleString()}</span>
+        <div className="flex items-center space-x-2 sm:space-x-3 mt-1.5 sm:mt-2 mb-3 sm:mb-4">
+          <span className="text-xs sm:text-sm font-bold text-charcoal">₹{product.price.toLocaleString()}</span>
           {product.discountPrice && (
-            <span className="text-xs text-gray-400 line-through">₹{product.discountPrice.toLocaleString()}</span>
+            <span className="text-[11px] sm:text-xs text-gray-400 line-through">₹{product.discountPrice.toLocaleString()}</span>
           )}
         </div>
       </div>
@@ -114,7 +114,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <button
         onClick={handleQuickAdd}
         disabled={addingCart}
-        className="w-full bg-charcoal text-white py-2.5 text-[11px] font-bold uppercase tracking-widest hover:bg-leather transition duration-300 disabled:opacity-50"
+        className="w-full bg-charcoal text-white py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest hover:bg-leather transition duration-300 disabled:opacity-50 rounded"
       >
         {addingCart ? 'Adding...' : 'Add to Bag'}
       </button>

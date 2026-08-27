@@ -42,20 +42,20 @@ export const InventoryManagementPage: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6 sm:mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Inventory & Stock Control</h2>
-          <p className="text-sm text-gray-500">Real-time stock audit and low-inventory threshold monitor</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Inventory & Stock Control</h2>
+          <p className="text-xs sm:text-sm text-gray-500">Real-time stock audit and low-inventory threshold monitor</p>
         </div>
       </div>
 
-      <div className="mb-6 flex gap-2">
+      <div className="mb-6 flex flex-wrap gap-2">
         {['ALL', 'IN_STOCK', 'LOW_STOCK', 'OUT_OF_STOCK'].map((st) => (
           <button
             key={st}
             onClick={() => setStatusFilter(st)}
-            className={`px-4 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition ${
-              statusFilter === st ? 'bg-admin-primary text-white' : 'bg-white text-gray-600 border hover:bg-gray-50'
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition ${
+              statusFilter === st ? 'bg-admin-primary text-white shadow-xs' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
             }`}
           >
             {st.replace('_', ' ')}
@@ -63,8 +63,8 @@ export const InventoryManagementPage: React.FC = () => {
         ))}
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+        <table className="w-full text-left text-sm min-w-[700px]">
           <thead className="bg-gray-50 text-gray-600 font-semibold border-b">
             <tr>
               <th className="p-4">Product Title</th>
@@ -118,7 +118,7 @@ export const InventoryManagementPage: React.FC = () => {
                     {!item.hasVariants && (
                       <button
                         onClick={() => { setEditingItem({ id: item.id, isVariant: false, name: item.title }); setNewStock(item.stock); }}
-                        className="text-admin-primary hover:underline font-medium"
+                        className="text-admin-primary hover:underline font-medium text-xs"
                       >
                         Adjust Stock
                       </button>
@@ -158,7 +158,7 @@ export const InventoryManagementPage: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 text-sm bg-admin-primary text-white rounded-lg font-medium"
+                  className="px-5 py-2 text-sm bg-admin-primary text-white rounded-lg font-medium hover:bg-leather-dark transition"
                 >
                   Update Stock
                 </button>

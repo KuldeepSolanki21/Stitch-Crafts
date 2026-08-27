@@ -37,11 +37,11 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal flex items-center justify-center p-6">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 space-y-6">
+    <div className="min-h-screen bg-charcoal flex items-center justify-center p-4 sm:p-6">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 sm:p-8 space-y-6">
         <div className="text-center space-y-2">
-          <h1 className="font-serif text-2xl font-bold tracking-wider text-charcoal">STITCH & CRAFTS</h1>
-          <p className="text-xs uppercase tracking-widest text-leather font-bold">Admin Atelier Control</p>
+          <h1 className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-charcoal">STITCH & CRAFTS</h1>
+          <p className="text-xs uppercase tracking-widest text-admin-primary font-bold">Admin Atelier Control</p>
         </div>
 
         {error && (
@@ -58,7 +58,7 @@ export const LoginPage: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:border-leather"
+              className="w-full px-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:border-admin-primary"
             />
           </div>
 
@@ -70,7 +70,7 @@ export const LoginPage: React.FC = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:border-leather pr-10"
+                className="w-full px-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:border-admin-primary pr-10"
               />
               <button
                 type="button"

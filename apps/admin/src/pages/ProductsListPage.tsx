@@ -53,14 +53,14 @@ export const ProductsListPage: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Product Matrix</h2>
-          <p className="text-sm text-gray-500">Manage handcrafted leather goods, pricing, and variants</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Product Matrix</h2>
+          <p className="text-xs sm:text-sm text-gray-500">Manage handcrafted leather goods, pricing, and variants</p>
         </div>
         <Link
           to="/products/new"
-          className="bg-admin-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-leather-dark transition"
+          className="w-full sm:w-auto text-center bg-admin-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-leather-dark transition shadow-sm"
         >
           + Add New Product
         </Link>
@@ -72,12 +72,12 @@ export const ProductsListPage: React.FC = () => {
           placeholder="Search by title or SKU..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-2 border rounded-lg bg-white w-80 text-sm focus:outline-none focus:border-admin-primary"
+          className="px-4 py-2 border rounded-lg bg-white w-full sm:w-80 text-sm focus:outline-none focus:border-admin-primary shadow-xs"
         />
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+        <table className="w-full text-left text-sm min-w-[750px]">
           <thead className="bg-gray-50 text-gray-600 font-semibold border-b">
             <tr>
               <th className="p-4">Product</th>
@@ -99,8 +99,8 @@ export const ProductsListPage: React.FC = () => {
               products.map((p) => (
                 <tr key={p.id} className="hover:bg-gray-50/50">
                   <td className="p-4 font-medium text-gray-900 flex items-center space-x-3">
-                    <img src={p.images[0] || 'https://via.placeholder.com/60'} alt={p.title} className="w-12 h-12 rounded object-cover border" />
-                    <div>
+                    <img src={p.images[0] || 'https://via.placeholder.com/60'} alt={p.title} className="w-12 h-12 rounded object-cover border shrink-0" />
+                    <div className="min-w-0">
                       <p className="font-semibold text-gray-900">{p.title}</p>
                       <p className="text-xs text-gray-400">{p.variants?.length || 0} Variants</p>
                     </div>
@@ -141,7 +141,7 @@ export const ProductsListPage: React.FC = () => {
                       {p.isPublished ? 'Published' : 'Draft'}
                     </button>
                   </td>
-                  <td className="p-4 text-right space-x-3">
+                  <td className="p-4 text-right space-x-3 whitespace-nowrap">
                     <Link to={`/products/edit/${p.id}`} className="text-admin-primary hover:underline font-medium">
                       Edit
                     </Link>

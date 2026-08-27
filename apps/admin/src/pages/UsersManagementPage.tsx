@@ -24,22 +24,22 @@ export const UsersManagementPage: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Customer & User Directory</h2>
-          <p className="text-sm text-gray-500">Manage registered atelier patrons, accounts, and role permissions</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Customer & User Directory</h2>
+          <p className="text-xs sm:text-sm text-gray-500">Manage registered atelier patrons, accounts, and role permissions</p>
         </div>
         <input
           type="text"
           placeholder="Search by name or email..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-2 border rounded-lg bg-white w-72 text-sm"
+          className="px-4 py-2 border rounded-lg bg-white w-full sm:w-72 text-sm shadow-xs focus:outline-none focus:border-admin-primary"
         />
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+        <table className="w-full text-left text-sm min-w-[650px]">
           <thead className="bg-gray-50 text-gray-600 font-semibold border-b">
             <tr>
               <th className="p-4">Customer Name</th>

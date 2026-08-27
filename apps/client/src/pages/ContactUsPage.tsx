@@ -10,15 +10,15 @@ export const ContactUsPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-20 space-y-16">
-      <div className="text-center max-w-xl mx-auto space-y-3">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-20 space-y-12 sm:space-y-16">
+      <div className="text-center max-w-xl mx-auto space-y-2 sm:space-y-3">
         <span className="text-xs uppercase tracking-widest text-leather font-bold">Client Concierge</span>
-        <h1 className="text-4xl font-serif font-bold text-charcoal">Contact Our Atelier</h1>
+        <h1 className="text-3xl sm:text-4xl font-serif font-bold text-charcoal">Contact Our Atelier</h1>
         <p className="text-xs text-gray-500">Have an inquiry regarding bespoke commissions, monogramming, or order logistics?</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-        <div className="bg-white p-8 border border-gray-200 shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16">
+        <div className="bg-white p-6 sm:p-8 border border-gray-200 shadow-sm rounded-2xl">
           {submitted ? (
             <div className="py-12 text-center space-y-3">
               <div className="w-12 h-12 bg-green-100 text-green-700 rounded-full flex items-center justify-center mx-auto font-bold">✓</div>
@@ -34,7 +34,7 @@ export const ContactUsPage: React.FC = () => {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full p-3 border focus:outline-none focus:border-leather"
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:border-leather"
                 />
               </div>
               <div>
@@ -44,7 +44,7 @@ export const ContactUsPage: React.FC = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full p-3 border focus:outline-none focus:border-leather"
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:border-leather"
                 />
               </div>
               <div>
@@ -54,7 +54,7 @@ export const ContactUsPage: React.FC = () => {
                   required
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full p-3 border focus:outline-none focus:border-leather"
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:border-leather"
                 />
               </div>
               <div>
@@ -64,12 +64,12 @@ export const ContactUsPage: React.FC = () => {
                   required
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full p-3 border focus:outline-none focus:border-leather"
+                  className="w-full p-3 border rounded-lg focus:outline-none focus:border-leather"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-charcoal text-white py-3.5 uppercase font-bold tracking-widest text-[11px] hover:bg-leather transition"
+                className="w-full bg-charcoal text-white py-3.5 uppercase font-bold tracking-widest text-[11px] hover:bg-leather transition rounded-lg shadow-sm"
               >
                 Send Message
               </button>
@@ -77,7 +77,7 @@ export const ContactUsPage: React.FC = () => {
           )}
         </div>
 
-        <div className="space-y-8 text-sm text-gray-600">
+        <div className="space-y-6 sm:space-y-8 text-xs sm:text-sm text-gray-600">
           <div>
             <h4 className="font-serif font-bold text-base text-charcoal mb-2">Flagship Atelier</h4>
             <p>74 Artisan Boulevard, Indiranagar</p>

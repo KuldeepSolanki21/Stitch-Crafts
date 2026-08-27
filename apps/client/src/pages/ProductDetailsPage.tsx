@@ -77,7 +77,7 @@ export const ProductDetailsPage: React.FC = () => {
       });
       navigate('/checkout');
     } catch (err: any) {
-      alert(err.response?.data?.message || 'Failed to initiate purchase');
+      alert(err.response?.data?.message || 'Failed to proceed to checkout');
     } finally {
       setBuyingNow(false);
     }
@@ -97,32 +97,37 @@ export const ProductDetailsPage: React.FC = () => {
         await wishlistApi.addToWishlist(product.id);
         setIsWishlisted(true);
       }
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
     }
   };
 
   if (loading) {
-    return <div className="max-w-7xl mx-auto py-24 text-center font-serif text-gray-400">Loading bespoke details...</div>;
+    return <div className="py-24 text-center font-serif text-gray-400">Loading master leather creation...</div>;
   }
 
   if (!product) {
     return (
-      <div className="max-w-7xl mx-auto py-24 text-center">
-        <h2 className="text-2xl font-serif font-bold mb-4">Product Not Found</h2>
-        <Link to="/shop" className="text-leather underline">Return to Shop Catalog</Link>
+      <div className="py-24 text-center">
+        <h2 className="text-2xl font-serif font-bold">Creation Not Found</h2>
+        <p className="text-gray-500 mt-2">The requested leather piece does not exist in our catalog.</p>
+        <Link to="/shop" className="text-leather underline text-sm mt-4 inline-block font-semibold">
+          Return to Shop Catalog
+        </Link>
       </div>
     );
   }
 
-  const currentPrice = selectedVariant ? selectedVariant.finalPrice : product.price;
+  const currentPrice = selectedVariant
+    ? product.price + selectedVariant.priceDelta
+    : product.price;
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
         {/* Gallery */}
-        <div className="space-y-4">
-          <div className="aspect-square bg-gray-100 overflow-hidden border border-gray-200 shadow-sm relative">
+        <div className="space-y-3 sm:space-y-4">
+          <div className="aspect-square bg-gray-100 overflow-hidden border border-gray-200 shadow-sm relative rounded-lg">
             <img src={selectedImage} alt={product.title} className="w-full h-full object-cover" />
             <button
               onClick={handleToggleWishlist}
@@ -132,12 +137,12 @@ export const ProductDetailsPage: React.FC = () => {
               {isWishlisted ? <span className="text-red-500">♥</span> : <span className="text-gray-500 hover:text-red-500">♡</span>}
             </button>
           </div>
-          <div className="flex gap-4 overflow-x-auto">
+          <div className="flex gap-2.5 sm:gap-4 overflow-x-auto pb-2">
             {product.images.map((img: string, i: number) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(img)}
-                className={`w-20 h-20 border-2 ${selectedImage === img ? 'border-leather' : 'border-transparent'}`}
+                className={`w-16 h-16 sm:w-20 sm:h-20 border-2 rounded shrink-0 overflow-hidden ${selectedImage === img ? 'border-leather' : 'border-transparent'}`}
               >
                 <img src={img} alt="" className="w-full h-full object-cover" />
               </button>
@@ -146,31 +151,31 @@ export const ProductDetailsPage: React.FC = () => {
         </div>
 
         {/* Details & Purchasing Actions */}
-        <div className="space-y-6">
+        <div className="space-y-5 sm:space-y-6">
           <span className="text-xs uppercase tracking-widest text-leather font-semibold">
             {product.category?.name} • SKU: {selectedVariant ? selectedVariant.sku : product.sku}
           </span>
-          <h1 className="text-3xl font-serif font-bold text-charcoal">{product.title}</h1>
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-charcoal">{product.title}</h1>
           
-          <div className="flex items-center space-x-4">
-            <span className="text-2xl font-bold text-charcoal">₹{currentPrice.toLocaleString()}</span>
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <span className="text-xl sm:text-2xl font-bold text-charcoal">₹{currentPrice.toLocaleString()}</span>
             {product.discountPrice && (
-              <span className="text-base text-gray-400 line-through">₹{product.discountPrice.toLocaleString()}</span>
+              <span className="text-sm sm:text-base text-gray-400 line-through">₹{product.discountPrice.toLocaleString()}</span>
             )}
-            <span className={`text-xs px-2.5 py-1 uppercase tracking-wider font-semibold rounded ${
+            <span className={`text-[10px] sm:text-xs px-2.5 py-1 uppercase tracking-wider font-semibold rounded ${
               product.availability === 'IN_STOCK' ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'
             }`}>
               {product.availability.replace('_', ' ')}
             </span>
           </div>
 
-          <p className="text-gray-600 leading-relaxed text-sm">{product.description}</p>
+          <p className="text-gray-600 leading-relaxed text-xs sm:text-sm">{product.description}</p>
 
           {/* Variants */}
           {product.variants && product.variants.length > 0 && (
-            <div className="space-y-3 pt-4 border-t border-gray-200">
+            <div className="space-y-2.5 pt-4 border-t border-gray-200">
               <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal">Leather Finish & Color</h4>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-2.5 sm:gap-3">
                 {product.variants.map((v: any) => (
                   <button
                     key={v.id}
@@ -178,11 +183,11 @@ export const ProductDetailsPage: React.FC = () => {
                       setSelectedVariant(v);
                       if (v.images && v.images.length > 0) setSelectedImage(v.images[0]);
                     }}
-                    className={`flex items-center space-x-2 px-4 py-2 border text-xs font-semibold ${
+                    className={`flex items-center space-x-2 px-3 sm:px-4 py-2 border rounded text-xs font-semibold ${
                       selectedVariant?.id === v.id ? 'border-leather bg-leather/5 text-leather' : 'border-gray-300'
                     }`}
                   >
-                    <span className="w-3.5 h-3.5 rounded-full border" style={{ backgroundColor: v.colorHex }}></span>
+                    <span className="w-3.5 h-3.5 rounded-full border shrink-0" style={{ backgroundColor: v.colorHex }}></span>
                     <span>{v.colorName}</span>
                   </button>
                 ))}
@@ -191,10 +196,10 @@ export const ProductDetailsPage: React.FC = () => {
           )}
 
           {/* Quantity Selector & Purchasing Actions */}
-          <div className="space-y-4 pt-6 border-t border-gray-200">
+          <div className="space-y-4 pt-4 sm:pt-6 border-t border-gray-200">
             <div className="flex items-center space-x-4">
               <span className="text-xs font-bold uppercase tracking-widest text-charcoal">Quantity:</span>
-              <div className="flex items-center border border-gray-300">
+              <div className="flex items-center border border-gray-300 rounded overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -213,12 +218,12 @@ export const ProductDetailsPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2">
               <button
                 type="button"
                 onClick={handleAddToCart}
                 disabled={addingCart}
-                className="w-full border-2 border-charcoal text-charcoal py-4 text-xs font-bold uppercase tracking-widest hover:bg-charcoal hover:text-white transition disabled:opacity-50"
+                className="w-full border-2 border-charcoal text-charcoal py-3.5 sm:py-4 text-xs font-bold uppercase tracking-widest hover:bg-charcoal hover:text-white transition disabled:opacity-50 rounded"
               >
                 {addingCart ? 'Adding to Bag...' : 'Add to Bag'}
               </button>
@@ -227,7 +232,7 @@ export const ProductDetailsPage: React.FC = () => {
                 type="button"
                 onClick={handleBuyNow}
                 disabled={buyingNow}
-                className="w-full bg-leather text-white py-4 text-xs font-bold uppercase tracking-widest hover:bg-leather-dark transition shadow-lg disabled:opacity-50"
+                className="w-full bg-leather text-white py-3.5 sm:py-4 text-xs font-bold uppercase tracking-widest hover:bg-leather-dark transition shadow-lg disabled:opacity-50 rounded"
               >
                 {buyingNow ? 'Processing...' : 'Buy Now'}
               </button>
@@ -236,9 +241,9 @@ export const ProductDetailsPage: React.FC = () => {
 
           {/* Specifications */}
           {product.details && (
-            <div className="pt-6 border-t border-gray-200 space-y-2">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal mb-3">Specifications</h4>
-              <div className="grid grid-cols-2 gap-4 text-xs text-gray-600">
+            <div className="pt-4 sm:pt-6 border-t border-gray-200 space-y-2">
+              <h4 className="text-xs font-bold uppercase tracking-widest text-charcoal mb-2 sm:mb-3">Specifications</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-xs text-gray-600">
                 {Object.entries(product.details).map(([key, val]) => (
                   <div key={key}>
                     <span className="font-semibold text-charcoal capitalize">{key}: </span>
@@ -253,9 +258,9 @@ export const ProductDetailsPage: React.FC = () => {
 
       {/* Related Products */}
       {related.length > 0 && (
-        <section className="mt-24 border-t border-leather/10 pt-16">
-          <h2 className="font-serif text-2xl font-bold text-center mb-12">Related Creations</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <section className="mt-16 sm:mt-24 border-t border-leather/10 pt-12 sm:pt-16">
+          <h2 className="font-serif text-xl sm:text-2xl font-bold text-center mb-8 sm:mb-12">Related Creations</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             {related.map((r) => (
               <ProductCard key={r.id} product={r} />
             ))}

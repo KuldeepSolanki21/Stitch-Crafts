@@ -51,15 +51,15 @@ export const ReviewsManagementPage: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6 sm:mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Customer Reviews Moderation</h2>
-          <p className="text-sm text-gray-500">Review, verify and publish client feedback on leather goods</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Customer Reviews Moderation</h2>
+          <p className="text-xs sm:text-sm text-gray-500">Review, verify and publish client feedback on leather goods</p>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+        <table className="w-full text-left text-sm min-w-[700px]">
           <thead className="bg-gray-50 text-gray-600 font-semibold border-b">
             <tr>
               <th className="p-4">Product</th>
@@ -103,13 +103,13 @@ export const ReviewsManagementPage: React.FC = () => {
                       {r.isApproved ? 'Published' : 'Under Review'}
                     </span>
                   </td>
-                  <td className="p-4 text-right space-x-2">
+                  <td className="p-4 text-right space-x-2 whitespace-nowrap">
                     {!r.isApproved ? (
-                      <button onClick={() => handleApprove(r.id)} className="text-green-600 font-bold hover:underline">Approve</button>
+                      <button onClick={() => handleApprove(r.id)} className="text-green-600 font-bold hover:underline text-xs">Approve</button>
                     ) : (
-                      <button onClick={() => handleReject(r.id)} className="text-amber-600 font-bold hover:underline">Unpublish</button>
+                      <button onClick={() => handleReject(r.id)} className="text-amber-600 font-bold hover:underline text-xs">Unpublish</button>
                     )}
-                    <button onClick={() => handleDelete(r.id)} className="text-red-600 hover:underline ml-2">Delete</button>
+                    <button onClick={() => handleDelete(r.id)} className="text-red-600 hover:underline ml-2 text-xs">Delete</button>
                   </td>
                 </tr>
               ))

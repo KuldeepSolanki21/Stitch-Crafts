@@ -188,10 +188,10 @@ export const ProductFormPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto pb-24">
-      <div className="flex justify-between items-center mb-6">
+    <div className="max-w-4xl mx-auto pb-16">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">{id ? 'Edit Leather Creation' : 'Add New Handcrafted Creation'}</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">{id ? 'Edit Leather Creation' : 'Add New Handcrafted Creation'}</h2>
           <p className="text-xs text-gray-500">Configure master catalog specs, high-res leather imagery, and variant pricing</p>
         </div>
       </div>
@@ -202,11 +202,11 @@ export const ProductFormPage: React.FC = () => {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
         {/* 1. Basic Information */}
-        <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
-          <h3 className="text-lg font-bold text-gray-800 border-b pb-2">1. Basic Information</h3>
-          <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white p-5 sm:p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
+          <h3 className="text-base sm:text-lg font-bold text-gray-800 border-b pb-2">1. Basic Information</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold uppercase text-gray-600 mb-1">
                 Product Title <span className="text-red-500">*</span>
@@ -252,7 +252,7 @@ export const ProductFormPage: React.FC = () => {
             />
           </div>
 
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <label className="block text-xs font-semibold uppercase text-gray-600 mb-1">
                 SKU <span className="text-red-500">*</span>
@@ -282,7 +282,7 @@ export const ProductFormPage: React.FC = () => {
             </div>
             <div>
               <label className="block text-xs font-semibold uppercase text-gray-600 mb-1">
-                Discount Price (₹) (Optional)
+                Discount Price (₹)
               </label>
               <input
                 type="number"
@@ -310,15 +310,15 @@ export const ProductFormPage: React.FC = () => {
         </div>
 
         {/* 2. Product Images & Gallery Section */}
-        <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
-          <div className="flex justify-between items-center border-b pb-2">
+        <div className="bg-white p-5 sm:p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b pb-2">
             <div>
-              <h3 className="text-lg font-bold text-gray-800">
+              <h3 className="text-base sm:text-lg font-bold text-gray-800">
                 2. Product Images & Gallery <span className="text-red-500">*</span>
               </h3>
               <p className="text-xs text-gray-500">Add high-resolution photography URLs or upload image files</p>
             </div>
-            <span className="text-xs font-bold text-leather">{formData.images.length} Image(s) Added</span>
+            <span className="text-xs font-bold text-admin-primary">{formData.images.length} Image(s) Added</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
@@ -336,7 +336,7 @@ export const ProductFormPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleAddImageUrl}
-                  className="bg-gray-800 text-white px-4 py-2 text-xs font-bold rounded-lg hover:bg-leather transition"
+                  className="bg-gray-800 text-white px-3 sm:px-4 py-2 text-xs font-bold rounded-lg hover:bg-leather transition shrink-0"
                 >
                   + Add URL
                 </button>
@@ -353,7 +353,7 @@ export const ProductFormPage: React.FC = () => {
                 onChange={handleFileUpload}
                 className="w-full px-3 py-1.5 border rounded-lg text-xs file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 cursor-pointer"
               />
-              {uploadingImage && <p className="text-xs text-leather font-medium animate-pulse">Uploading photo...</p>}
+              {uploadingImage && <p className="text-xs text-admin-primary font-medium animate-pulse">Uploading photo...</p>}
             </div>
           </div>
 
@@ -386,9 +386,9 @@ export const ProductFormPage: React.FC = () => {
         </div>
 
         {/* 3. Artisan Specifications */}
-        <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
-          <h3 className="text-lg font-bold text-gray-800 border-b pb-2">3. Artisan Leather Specifications</h3>
-          <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white p-5 sm:p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
+          <h3 className="text-base sm:text-lg font-bold text-gray-800 border-b pb-2">3. Artisan Leather Specifications</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold uppercase text-gray-600 mb-1">Material</label>
               <input
@@ -413,34 +413,34 @@ export const ProductFormPage: React.FC = () => {
         </div>
 
         {/* 4. Variants Matrix */}
-        <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
-          <h3 className="text-lg font-bold text-gray-800 border-b pb-2">4. Product Variants Matrix (Optional)</h3>
-          <div className="grid grid-cols-4 gap-3">
+        <div className="bg-white p-5 sm:p-6 rounded-xl border border-gray-100 shadow-sm space-y-4">
+          <h3 className="text-base sm:text-lg font-bold text-gray-800 border-b pb-2">4. Product Variants Matrix (Optional)</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <input
               type="text"
               placeholder="Color Name (e.g. Cognac)"
               value={newVariant.colorName}
               onChange={(e) => setNewVariant({ ...newVariant, colorName: e.target.value })}
-              className="p-2 border rounded text-xs"
+              className="p-2 border rounded-lg text-xs"
             />
             <input
               type="text"
               placeholder="Hex (#8B4513)"
               value={newVariant.colorHex}
               onChange={(e) => setNewVariant({ ...newVariant, colorHex: e.target.value })}
-              className="p-2 border rounded text-xs"
+              className="p-2 border rounded-lg text-xs"
             />
             <input
               type="text"
               placeholder="Variant SKU (e.g. SC-01-COG)"
               value={newVariant.sku}
               onChange={(e) => setNewVariant({ ...newVariant, sku: e.target.value.toUpperCase() })}
-              className="p-2 border rounded text-xs"
+              className="p-2 border rounded-lg text-xs"
             />
             <button
               type="button"
               onClick={handleAddVariant}
-              className="bg-gray-800 text-white text-xs font-bold py-2 rounded hover:bg-leather transition"
+              className="bg-gray-800 text-white text-xs font-bold py-2 rounded-lg hover:bg-leather transition"
             >
               + Add Variant
             </button>
@@ -448,9 +448,9 @@ export const ProductFormPage: React.FC = () => {
 
           <div className="space-y-2 mt-4">
             {formData.variants.map((v, idx) => (
-              <div key={idx} className="flex justify-between items-center bg-gray-50 p-3 rounded text-sm">
+              <div key={idx} className="flex justify-between items-center bg-gray-50 p-3 rounded-lg text-sm">
                 <div className="flex items-center space-x-3">
-                  <span className="w-4 h-4 rounded-full border shadow-sm" style={{ backgroundColor: v.colorHex }}></span>
+                  <span className="w-4 h-4 rounded-full border shadow-sm shrink-0" style={{ backgroundColor: v.colorHex }}></span>
                   <span className="font-semibold">{v.colorName}</span>
                   <span className="text-gray-500 font-mono text-xs">({v.sku})</span>
                 </div>
@@ -463,13 +463,13 @@ export const ProductFormPage: React.FC = () => {
         </div>
 
         {/* 5. Publishing Status */}
-        <div className="flex items-center space-x-6 bg-white p-4 rounded-xl border border-gray-100">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-6 bg-white p-4 rounded-xl border border-gray-100">
           <label className="flex items-center space-x-2 text-sm font-medium cursor-pointer">
             <input
               type="checkbox"
               checked={formData.isPublished}
               onChange={(e) => setFormData({ ...formData, isPublished: e.target.checked })}
-              className="w-4 h-4 accent-leather"
+              className="w-4 h-4 accent-admin-primary"
             />
             <span>Published on Customer Storefront</span>
           </label>
@@ -478,7 +478,7 @@ export const ProductFormPage: React.FC = () => {
               type="checkbox"
               checked={formData.featured}
               onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-              className="w-4 h-4 accent-leather"
+              className="w-4 h-4 accent-admin-primary"
             />
             <span>Featured Luxury Collection</span>
           </label>
@@ -487,7 +487,7 @@ export const ProductFormPage: React.FC = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-admin-primary text-white py-4 rounded-xl font-bold uppercase tracking-wider text-sm hover:bg-leather-dark transition shadow-lg disabled:opacity-50"
+          className="w-full bg-admin-primary text-white py-3.5 sm:py-4 rounded-xl font-bold uppercase tracking-wider text-xs sm:text-sm hover:bg-leather-dark transition shadow-lg disabled:opacity-50"
         >
           {loading ? 'Publishing...' : id ? 'Update Master Product' : 'Publish Product to Catalog'}
         </button>
