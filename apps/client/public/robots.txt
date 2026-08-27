@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /shop
+Allow: /category/
+Allow: /product/
+Allow: /about
+Allow: /contact
+
+Disallow: /admin
+Disallow: /admin/
+Disallow: /account
+Disallow: /orders
+Disallow: /cart
+Disallow: /checkout
+Disallow: /api/
+
+Sitemap: https://stitchandcrafts.com/sitemap.xml
